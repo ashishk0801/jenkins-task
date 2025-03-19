@@ -11,7 +11,8 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    app = docker.build("hello-world-app:${env.BUILD_ID}")
+                    // Use shell commands instead of docker.build
+                    sh "docker build -t hello-world-app:${env.BUILD_ID} ."
                 }
             }
         }
@@ -26,7 +27,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying...'
-                // For demo, we'll just run the container
+                // For demo, run the container with shell command
                 sh "docker run -d -p 80:80 hello-world-app:${env.BUILD_ID}"
             }
         }
