@@ -12,7 +12,7 @@ pipeline {
             steps {
                 script {
                     // Use shell commands instead of docker.build
-                    sh "docker build -t hello-world-app:${env.BUILD_ID} ."
+                    sh "sudo docker build -t hello-world-app:${env.BUILD_ID} ."
                 }
             }
         }
@@ -28,7 +28,7 @@ pipeline {
             steps {
                 echo 'Deploying...'
                 // For demo, run the container with shell command
-                sh "docker run -d -p 80:80 hello-world-app:${env.BUILD_ID}"
+                sh "sudo docker run -d -p 80:80 hello-world-app:${env.BUILD_ID}"
             }
         }
     }
